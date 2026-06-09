@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llm-evaluation-toolkit"
+version = "0.1.0"
+description = "A lightweight toolkit for evaluating LLM outputs"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+  { name = "swoswoyuu1156", email = "174082729+swoswoyuu1156@users.noreply.github.com" }
+]
+keywords = ["llm", "evaluation", "nlp", "machine-learning", "ai"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.24",
+  "requests>=2.28",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.20"]
+semantic = ["sentence-transformers>=2.2"]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov>=4.0",
+  "ruff>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/swoswoyuu1156/llm-evaluation-toolkit"
+Repository = "https://github.com/swoswoyuu1156/llm-evaluation-toolkit"
+Issues = "https://github.com/swoswoyuu1156/llm-evaluation-toolkit/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/llm_eval"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
