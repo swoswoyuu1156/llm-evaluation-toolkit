@@ -10,6 +10,7 @@ from llm_eval.providers import BaseProvider, GenerationConfig
 from llm_eval.providers.openai_provider import OpenAIProvider
 from llm_eval.providers.anthropic_provider import AnthropicProvider
 from llm_eval.types import EvalResult
+from llm_eval.datasets import DatasetLoader, EvalDataset
 
 __version__ = "0.1.0"
 __all__ = [
@@ -24,4 +25,6 @@ __all__ = [
     "GenerationConfig",
     "OpenAIProvider",
     "AnthropicProvider",
+    "DatasetLoader",
+    "EvalDataset",
 ]
