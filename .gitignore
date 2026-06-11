@@ -216,3 +216,17 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Virtual environment
+.venv/
+
+# Build artifacts
+dist/
+*.egg-info/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Environment variables
+.env
