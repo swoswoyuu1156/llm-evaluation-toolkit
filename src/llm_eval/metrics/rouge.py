@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from rouge_score import rouge_scorer
 
 from llm_eval.metrics.base import BaseMetric
