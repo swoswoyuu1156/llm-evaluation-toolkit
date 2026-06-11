@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 from llm_eval.metrics import BaseMetric
 from llm_eval.types import EvalResult
@@ -15,23 +15,12 @@ class BaseEvaluator(ABC):
         predictions: list[str],
         references: list[str],
     ) -> dict[str, EvalResult]:
-        """
-        登録された全MetricでLLM出力を評価する
-
-        Args:
-            predictions: LLMの出力テキストのリスト
-            references:  正解テキストのリスト
-
-        Returns:
-            dict: {metric名: EvalResult} の辞書
-        """
         results = {}
         for metric in self.metrics:
             results[metric.name] = metric.compute(predictions, references)
         return results
 
     def add_metric(self, metric: BaseMetric) -> None:
-        """Metricを追加する"""
         self.metrics.append(metric)
 
     def __repr__(self) -> str:

@@ -1,7 +1,7 @@
 import nltk
 from nltk.translate.bleu_score import corpus_bleu, SmoothingFunction
 
-from llm_eval.metrics import BaseMetric
+from llm_eval.metrics.base import BaseMetric
 from llm_eval.types import EvalResult
 
 

@@ -1,4 +1,3 @@
-import pytest
 from llm_eval.evaluators import BaseEvaluator
 from llm_eval.metrics import BLEUMetric, ROUGEMetric
 from llm_eval.types import EvalResult

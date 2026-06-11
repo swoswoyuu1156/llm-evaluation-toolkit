@@ -1,7 +1,7 @@
 import os
 import re
 
-from llm_eval.metrics import BaseMetric
+from llm_eval.metrics.base import BaseMetric
 from llm_eval.types import EvalResult
 
 
