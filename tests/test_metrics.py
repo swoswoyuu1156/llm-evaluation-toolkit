@@ -57,15 +57,39 @@ class TestROUGEMetric:
 
 
 class TestSemanticSimilarityMetric:
+    def _make_mock_metric(self):
+        """モック済みのSemanticSimilarityMetricを返す"""
+        import numpy as np
+        from unittest.mock import MagicMock, patch
+
+        metric = SemanticSimilarityMetric()
+
+        mock_model = MagicMock()
+        mock_model.encode.side_effect = lambda texts, **kwargs: np.array([
+            [1.0, 0.0, 0.0] if i % 2 == 0 else [0.9, 0.1, 0.0]
+            for i in range(len(texts))
+        ])
+        metric._model = mock_model
+        return metric
+
     def test_high_similarity_for_similar_texts(
         self, sample_predictions, sample_references
     ):
-        metric = SemanticSimilarityMetric()
+        metric = self._make_mock_metric()
         result = metric.compute(sample_predictions, sample_references)
         assert result.score > 0.5
 
     def test_perfect_match_score(self):
+        import numpy as np
+        from unittest.mock import MagicMock
+
         metric = SemanticSimilarityMetric()
+        mock_model = MagicMock()
+        mock_model.encode.side_effect = lambda texts, **kwargs: np.array([
+            [1.0, 0.0, 0.0] for _ in texts
+        ])
+        metric._model = mock_model
+
         texts = ["the cat sat on the mat"]
         result = metric.compute(texts, texts)
         assert result.score > 0.99
@@ -73,7 +97,7 @@ class TestSemanticSimilarityMetric:
     def test_details_contain_individual_scores(
         self, sample_predictions, sample_references
     ):
-        metric = SemanticSimilarityMetric()
+        metric = self._make_mock_metric()
         result = metric.compute(sample_predictions, sample_references)
         assert "individual_scores" in result.details
         assert len(result.details["individual_scores"]) == len(sample_predictions)
