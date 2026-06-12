@@ -60,7 +60,7 @@ class TestSemanticSimilarityMetric:
     def _make_mock_metric(self):
         """モック済みのSemanticSimilarityMetricを返す"""
         import numpy as np
-        from unittest.mock import MagicMock, patch
+        from unittest.mock import MagicMock
 
         metric = SemanticSimilarityMetric()
 
