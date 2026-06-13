@@ -4,14 +4,25 @@ build-backend = "hatchling.build"
 
 [project]
 name = "llm-evaluation-toolkit"
-version = "0.1.0"
-description = "A lightweight toolkit for evaluating LLM outputs"
+version = "0.1.1"
+description = "A lightweight toolkit for evaluating LLM outputs: BLEU, ROUGE, semantic similarity, and LLM-as-a-Judge"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
   { name = "swoswoyuu1156", email = "174082729+swoswoyuu1156@users.noreply.github.com" }
 ]
-keywords = ["llm", "evaluation", "nlp", "machine-learning", "ai"]
+keywords = [
+  "llm",
+  "evaluation",
+  "nlp",
+  "machine-learning",
+  "ai",
+  "bleu",
+  "rouge",
+  "semantic-similarity",
+  "llm-as-a-judge",
+  "benchmark",
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -22,6 +33,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 requires-python = ">=3.9"
 dependencies = [
