@@ -14,3 +14,8 @@ All notable changes to this project will be documented here.
 - `BaseEvaluator` for running multiple metrics at once
 - GitHub Actions CI/CD pipeline
 - Support for Python 3.9, 3.10, 3.11
+
+## [0.1.1] - 2024-01-08
+
+### Changed
+- Improved PyPI metadata with additional keywords and classifiers

@@ -217,3 +217,12 @@ ruff check src/ tests/
 MIT License — 詳細は [LICENSE](LICENSE) をご確認ください。
 
 *MIT License — see [LICENSE](LICENSE) for details.*
+
+## デモ / Demo
+
+👉 [HuggingFace Spaces でデモを試す](https://huggingface.co/spaces/swoswoyuu1156/llm-evaluation-toolkit-demo)
+
+## 関連記事 / Articles
+
+- [LLMの出力を簡単に評価できるPythonライブラリを作りました（Zenn）](https://zenn.dev/swoswoyuu1156/articles/7a1208cd31e84a)
+- [LLMの出力を簡単に評価できるPythonライブラリを作りました（Qiita）](https://qiita.com/swoswoyuu1156/items/60423dd939a483347c5c)
