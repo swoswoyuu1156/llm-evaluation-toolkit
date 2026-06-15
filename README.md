@@ -3,7 +3,7 @@
 [![CI](https://github.com/swoswoyuu1156/llm-evaluation-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/swoswoyuu1156/llm-evaluation-toolkit/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PyPI version](https://badge.fury.io/py/llm-evaluation-toolkit.svg)](https://badge.fury.io/py/llm-evaluation-toolkit)
+[![PyPI version](https://img.shields.io/pypi/v/llm-evaluation-toolkit)](https://pypi.org/project/llm-evaluation-toolkit/)
 
 LLMの出力を評価するための軽量Pythonライブラリです。BLEU・ROUGE・意味的類似度・LLM-as-a-Judgeの4種類の評価指標を、統一されたAPIで利用できます。
 
@@ -211,6 +211,39 @@ ruff check src/ tests/
 *Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) first.*
 
 ---
+
+## 直面した課題と解決方法 / Challenges & Solutions
+
+### 1. 循環インポート問題
+
+`metrics/__init__.py` に `BaseMetric` クラスと各指標クラスのインポートを同一ファイルに書いたことで、循環インポートが発生しました。
+
+**解決方法**：`BaseMetric` を独立した `metrics/base.py` に分離し、各指標クラスは `metrics/__init__.py` ではなく `metrics/base.py` から継承する設計に変更しました。
+
+### 2. Python 3.9 互換性問題
+
+`list[str] | None` という型ヒント構文がPython 3.10以上でしか動かず、GitHub ActionsのCI環境（Python 3.9）でテストが失敗しました。
+
+**解決方法**：全ファイルの先頭に `from __future__ import annotations` を追加することで、Python 3.9環境でも新しい型ヒント構文を使えるようにしました。
+
+### 3. CI環境での外部APIレート制限
+
+`SemanticSimilarityMetric` のテストがCI実行のたびにHuggingFaceからモデルをダウンロードしようとした結果、`429 Too Many Requests` エラーが発生しました。
+
+**解決方法**：`unittest.mock` を使ってモデルのダウンロード処理をモック化し、実際のネットワーク通信なしでテストを実行できるようにしました。これによりCI環境・オフライン環境でも安定してテストが通るようになりました。
+
+### 4. LLMのスコアにおける浮動小数点誤差
+
+`LLMJudgeMetric` のテストで `assert result.score == 0.8` が `0.8000000000000002` として失敗しました。
+
+**解決方法**：`pytest.approx()` を使用して許容誤差を持たせた比較に変更しました。浮動小数点演算の特性への理解を深めるきっかけになりました。
+
+### 5. パッケージリリースワークフローの設定ミス
+
+GitHub Actionsの `release.yml` に `Publish to PyPI` のステップが含まれておらず、タグをpushしてもPyPIへの自動公開が行われませんでした。
+
+**解決方法**：`twine` を使った公開ステップを追加し、PyPIのAPIトークンをGitHub Secretsに登録することで自動リリースパイプラインを整備しました。
+
 
 ## ライセンス / License
 
